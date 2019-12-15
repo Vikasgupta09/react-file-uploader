@@ -1,0 +1,17 @@
+{
+  "name": "react-file-uploader",
+  "version": "1.0.0",
+  "description": "",
+  "scripts": {
+    "preinstall": "npm run install-client && npm run install-server",
+    "install-client": "cd client && npm install && npm start",
+    "install-server": "cd server && npm install && npm start",
+    "start": "cd server && npm run start"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Vikasgupta09/react-file-uploader.git"
+  },
+  "author": "Vikas Gupta",
+  "license": "ISC"
+}

@@ -1,0 +1,12 @@
+.dashboard-container {
+  width: 50%;
+  margin-top: 10%;
+}
+
+.dashboard-container .dashboard-title {
+  margin-left: 42%;
+}
+
+.dashboard-container .dashboard-content {
+  width: 100%;
+}
