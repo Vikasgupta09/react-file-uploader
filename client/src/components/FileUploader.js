@@ -39,7 +39,7 @@ class FileUploader extends React.Component {
               this.props.onClear();
             }}
           >
-          Upload Again
+          Upload Another File
           </button>
         </div>
       );

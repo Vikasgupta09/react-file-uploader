@@ -37,7 +37,7 @@ server.post('/clean', function(req, res) {
   rimraf('./uploads/*', function () { 
     console.log('all files removed.');
   });
-  return res.status(200);
+  return res.status(200).send('success');
 });
 
 // serve static files from here
