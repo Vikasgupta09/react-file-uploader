@@ -35,30 +35,27 @@ class FileSelector extends React.Component {
     // Get allowed mime type
     const types = this.props.restrictions.allowedFileTypes;
     let error = '';
-    console.log(file.name)
-    console.log(file.type);
-    // check if file type is allowed or not
-    if (
-      types.every(type => {
-        if (type.indexOf('*') > -1) {
-          let mimeTypeAllowed = type.split('/')[0];
-          let fileMimeTypePrefix = file.type.split('/')[0];
-          console.log(mimeTypeAllowed, fileMimeTypePrefix);
-          console.log('if -',mimeTypeAllowed === fileMimeTypePrefix);
-          return mimeTypeAllowed !== fileMimeTypePrefix;
-        } else {
-          console.log('else -',file.type !== type);
-          return file.type !== type;
-        }
-      })
-    ) {
-      error += file.type + ' is not a supported file format. ';
+    // check whether all files types are allowed
+    if(types && types.indexOf('*') < 0) {
+      // check if given file type is allowed or not
+      if (
+        types.every(type => {
+          if (type.indexOf('*') > -1) {
+            let mimeTypeAllowed = type.split('/')[0];
+            let fileMimeTypePrefix = file.type.split('/')[0];
+            return mimeTypeAllowed !== fileMimeTypePrefix;
+          } else {
+            return file.type !== type;
+          }
+        })
+      ) {
+        error += file.type + ' is not a supported file format. ';
+      }
     }
     // check if file size is in allowed range or not
     if (file.size > this.props.restrictions.maxFileSize) {
-      error += file.name + ' exceeds max allowed limit.';
+      error += file.name + ' exceeds max allowed file size limit.';
     }
-    console.log('returning err-',error);
     return error;
   };
 
