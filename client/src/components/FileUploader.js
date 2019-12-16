@@ -45,13 +45,27 @@ class FileUploader extends React.Component {
       );
     } else {
       return (
-        <button
-          className="ui primary button"
-          disabled={this.props.uploading}
-          onClick={this.uploadFiles}
-        >
-          Upload
-        </button>
+        <div className="ui buttons">
+          <button
+            className="ui primary button"
+            disabled={this.props.uploading}
+            onClick={this.uploadFiles}
+            style={{marginRight: '0px'}}
+          >
+            Upload
+          </button>
+          <div className="or"></div>
+          <button
+            className="ui button"
+            disabled={this.props.uploading}
+            onClick={() => {
+              this.props.onClear();
+            }}
+            style={{marginLeft: '0px'}}
+          >
+            Select Another File
+          </button>
+        </div>
       );
     }
   };
