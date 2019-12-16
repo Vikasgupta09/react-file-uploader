@@ -37,9 +37,6 @@ class UploaderDashboard extends React.Component {
         {this.state.files.length > 0 && (
           <FileUploader
             files={this.state.files}
-            uploadProgress={0}
-            uploading={false}
-            successfullUploaded={false}
             onClear={this.handleClear}
           />
         )}

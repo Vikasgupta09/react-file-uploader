@@ -2,7 +2,6 @@ import React from 'react';
 import Progress from './UploadProgress';
 import { connect } from 'react-redux';
 import { uploadFile, resetFileUpload } from '../actions';
-import PropTypes from 'prop-types';
 
 class FileUploader extends React.Component {
   static defaultProps = {
@@ -74,12 +73,6 @@ class FileUploader extends React.Component {
     );
   }
 }
-
-FileUploader.propTypes = {
-  uploading: PropTypes.bool,
-  errorUploading: PropTypes.bool,
-  successfullUploaded: PropTypes.bool
-};
 
 const mapStateToProps = state => {
   return {
