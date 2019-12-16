@@ -39,6 +39,7 @@ server.post('/clean', function(req, res) {
   return res.status(200);
 });
 
-server.listen(process.env.PORT || 8000, () => {
-  console.log("Express server listening on port %d in %s mode", this.address().port, app.settings.env);
+let port = process.env.PORT || 8000;
+server.listen(port, () => {
+  console.log("Express server listening on port:", port);
 });
