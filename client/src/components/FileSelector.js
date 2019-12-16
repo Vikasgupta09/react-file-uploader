@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 
 class FileSelector extends React.Component {
   constructor(props) {
@@ -33,7 +32,7 @@ class FileSelector extends React.Component {
 
   validateFile = file => {
     // Get allowed mime type
-    const types = this.props.restrictions.allowedFileTypes;
+    const types = this.props.config.allowedFileTypes;
     let error = '';
     // check whether all files types are allowed
     if(types && types.indexOf('*') < 0) {
@@ -53,7 +52,7 @@ class FileSelector extends React.Component {
       }
     }
     // check if file size is in allowed range or not
-    if (file.size > this.props.restrictions.maxFileSize) {
+    if (file.size > this.props.config.maxFileSize) {
       error += file.name + ' exceeds max allowed file size limit.';
     }
     return error;
@@ -76,8 +75,10 @@ class FileSelector extends React.Component {
   };
 
   render() {
-    let allowedFileTypes = this.props.restrictions.allowedFileTypes.join();
-    let maxFileSize = this.props.restrictions.maxFileSize / 1000000 + ' Mb';
+    const allowedFileTypes = this.props.config.allowedFileTypes.join();
+    const maxFileSize = this.props.config.maxFileSize / 1000000 + ' Mb';
+    const errorHeading = this.props.config.errorHeading;
+    const uploaderContent = this.props.config.uploaderContent;
 
     return (
       <div>
@@ -102,7 +103,7 @@ class FileSelector extends React.Component {
             onChange={this.onFilesAdded}
             style={{ display: 'none' }}
           />
-          <h2>Drag 'n' drop your file here, or click to select file</h2>
+          <h2>{uploaderContent}</h2>
         </div>
         <div>
           <div className="ui warning bottom attached message">
@@ -114,7 +115,7 @@ class FileSelector extends React.Component {
         {this.state.errorMessage && (
           <div className="ui error message">
             <div className="header">
-              There is an error with your file submission
+              {errorHeading}
             </div>
             <p>{this.state.errorMessage}</p>
           </div>
@@ -124,14 +125,13 @@ class FileSelector extends React.Component {
   }
 }
 
-FileSelector.propTypes = {
-  maxFileSize: PropTypes.number,
-  allowedFileTypes: PropTypes.array
-};
-
 FileSelector.defaultProps = {
-  maxFileSize: 1000000,
-  allowedFileTypes: ['image/*']
+  config: {
+    maxFileSize: 1000000,
+    allowedFileTypes: ['image/*'],
+    errorHeading: 'There is an error with your file submission',
+    uploaderContent: "Drag 'n' drop your file here, or click to select file"
+  }
 };
 
 export default FileSelector;

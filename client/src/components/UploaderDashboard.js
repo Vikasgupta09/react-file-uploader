@@ -23,14 +23,14 @@ class UploaderDashboard extends React.Component {
   render() {
     return (
       <div className="ui dashboard-container">
-        <span className="ui dashboard-title teal center aligned header">
-          File Uploader
+        <span className={"ui dashboard-title center aligned header " + (this.props.config.primaryColor)}>
+          {this.props.config.uploaderHeading}
         </span>
 
         {this.state.files.length === 0 && (
           <FileSelector
             onFilesAdded={this.onFilesAdded}
-            restrictions={this.props.config}
+            config={this.props.config}
           />
         )}
 
@@ -48,4 +48,10 @@ class UploaderDashboard extends React.Component {
   }
 }
 
+UploaderDashboard.defaultProps = {
+  config: {
+    primaryColor: "teal",
+    uploaderHeading: "File Uploader"
+  }
+}
 export default UploaderDashboard;
