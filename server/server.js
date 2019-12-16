@@ -3,6 +3,7 @@ const cors = require('cors');
 const multer = require('multer');
 const server = express();
 const rimraf = require('rimraf');
+const path = require('path');
 
 let corsOptions = {
   origin: '*',
@@ -38,6 +39,12 @@ server.post('/clean', function(req, res) {
   });
   return res.status(200);
 });
+
+// serve static files from here
+server.use(express.static(path.join(__dirname, '../client/build/')));
+server.get('*', ((req, res) => {
+  res.sendFile(path.join(__dirname, '../client/build/'));
+}));
 
 let port = process.env.PORT || 8000;
 server.listen(port, () => {
